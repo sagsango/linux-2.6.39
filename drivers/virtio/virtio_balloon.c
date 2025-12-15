@@ -97,6 +97,7 @@ static void tell_host(struct virtio_balloon *vb, struct virtqueue *vq)
 	wait_for_completion(&vb->acked);
 }
 
+/* XXX: inflate the balloon */
 static void fill_balloon(struct virtio_balloon *vb, size_t num)
 {
 	/* We can only do one array worth at a time. */
@@ -137,6 +138,7 @@ static void release_pages_by_pfn(const u32 pfns[], unsigned int num)
 	}
 }
 
+/* XXX: deflate the balloon */
 static void leak_balloon(struct virtio_balloon *vb, size_t num)
 {
 	struct page *page;
@@ -276,6 +278,7 @@ static int balloon(void *_vballoon)
 	return 0;
 }
 
+/* XXX: init the ballooning driver */
 static int virtballoon_probe(struct virtio_device *vdev)
 {
 	struct virtio_balloon *vb;
@@ -361,14 +364,20 @@ static unsigned int features[] = {
 };
 
 static struct virtio_driver virtio_balloon_driver = {
-	.feature_table = features,
+	.feature_table = features, /* XXX: features bit that driver supports */
 	.feature_table_size = ARRAY_SIZE(features),
-	.driver.name =	KBUILD_MODNAME,
+	.driver.name =	KBUILD_MODNAME, /* XXX: KBUILD_MODNAME resolves to the 
+       current module’s filename (without “.ko”), e.g. "virtio_balloon". */
 	.driver.owner =	THIS_MODULE,
-	.id_table =	id_table,
-	.probe =	virtballoon_probe,
-	.remove =	__devexit_p(virtballoon_remove),
-	.config_changed = virtballoon_changed,
+	.id_table =	id_table, /* XXX: List of device IDs this driver can bind to.
+       VIRTIO_ID_BALLOON matches the virtio PCI device presented by QEMU. */
+	.probe =	virtballoon_probe, /* XXX: init function on module loading */
+	.remove =	__devexit_p(virtballoon_remove), /* XXX: exit function 
+                                                   during module unloading */
+	.config_changed = virtballoon_changed, /* XXX: Virtio core calls this 
+     when the device’s config space changes (e.g., host updates the target 
+     balloon size num_pages). Implementation simply wakes the waitqueue so
+     the balloon() thread recomputes diff and acts. */
 };
 
 static int __init init(void)
