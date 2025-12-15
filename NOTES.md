@@ -1,7 +1,9 @@
-v_2.6 ❱❱❱ cd linux-2.6.39
 linux-2.6.39 ❱❱❱ ls
 arch           COPYING        crypto         drivers        fs             init           Kbuild         kernel         MAINTAINERS    mm             README         samples        security       tools          virt
 block          CREDITS        Documentation  firmware       include        ipc            Kconfig        lib            Makefile       net            REPORTING-BUGS scripts        sound          usr
+
+
+
 linux-2.6.39 ❱❱❱ find * | grep kvm
 1128:arch/ia64/include/asm/kvm_host.h
 1194:arch/ia64/include/asm/kvm.h
@@ -150,6 +152,9 @@ linux-2.6.39 ❱❱❱ find * | grep kvm
 37700:virt/kvm/eventfd.c
 37701:virt/kvm/assigned-dev.c
 37702:virt/kvm/irq_comm.c
+
+
+
 linux-2.6.39 ❱❱❱ find * | grep balloon
 13187:arch/arm/mach-pxa/include/mach/balloon3.h
 13314:arch/arm/mach-pxa/balloon3.c
@@ -160,6 +165,9 @@ linux-2.6.39 ❱❱❱ find * | grep balloon
 26770:drivers/pcmcia/pxa2xx_balloon3.c
 31282:include/xen/balloon.h
 32411:include/linux/virtio_balloon.h
+
+
+
 linux-2.6.39 ❱❱❱ find * | grep xen
 1040:arch/ia64/xen
 1041:arch/ia64/xen/time.h
@@ -332,6 +340,9 @@ linux-2.6.39 ❱❱❱ find * | grep xen
 31286:include/xen/xencomm.h
 31287:include/xen/evtchn.h
 31288:include/xen/xenbus.h
+
+
+
 linux-2.6.39 ❱❱❱ find * | grep virtio
 4553:arch/s390/include/asm/kvm_virtio.h
 23286:drivers/net/virtio_net.c
@@ -369,7 +380,9 @@ linux-2.6.39 ❱❱❱ find * | grep virtio
 37358:tools/virtio/vhost_test/Makefile
 37359:tools/virtio/vhost_test/vhost_test.c
 37360:tools/virtio/virtio_test.c
-linux-2.6.39 ❱❱❱
+
+
+
 linux-2.6.39 ❱❱❱ ls drivers
 accessibility base          clocksource   dio           gpio          ide           Kconfig       md            mmc           oprofile      pnp           rtc           sn            telephony     vhost         xen
 acpi          block         connector     dma           gpu           idle          leds          media         mtd           parisc        power         s390          spi           thermal       video         zorro
@@ -377,6 +390,8 @@ amba          bluetooth     cpufreq       edac          hid           ieee802154
 ata           cdrom         cpuidle       eisa          hwmon         infiniband    macintosh     message       nfc           pci           ps3           scsi          staging       uio           vlynq
 atm           char          crypto        firewire      hwspinlock    input         Makefile      mfd           nubus         pcmcia        rapidio       sfi           target        usb           w1
 auxdisplay    clk           dca           firmware      i2c           isdn          mca           misc          of            platform      regulator     sh            tc            uwb           watchdog
+
+
+
 linux-2.6.39 ❱❱❱ ls virt
 kvm
-linux-2.6.39 ❱❱❱
