@@ -61,6 +61,7 @@ struct vring_used {
 	struct vring_used_elem ring[];
 };
 
+/* XXX: 5. vring embadded into "struct vring_virtqueue" */
 struct vring {
 	unsigned int num;
 
@@ -71,6 +72,7 @@ struct vring {
 	struct vring_used *used;
 };
 
+/* XXX: 7. init the vring */
 /* The standard layout for the ring is a continuous chunk of memory which looks
  * like this.  We assume num is a power of 2.
  *
@@ -96,6 +98,18 @@ struct vring {
 static inline void vring_init(struct vring *vr, unsigned int num, void *p,
 			      unsigned long align)
 {
+
+    /* NOTE: the memory will be present in the page
+     *       memory-layout is given above in the comment
+     *       also see the NOTES-02.md;
+     *
+     *
+     *       struct vring will not be there it will point to it.
+     *       (as it have first member n).
+     *
+     *       in above comment they are not takling abouut the structure itself, 
+     *       they are talking about the layout of it.
+     */
 	vr->num = num;
 	vr->desc = p;
 	vr->avail = p + num*sizeof(struct vring_desc);

@@ -1,3 +1,4 @@
+/* XXX: mother of virtio */
 #ifndef _LINUX_VIRTIO_H
 #define _LINUX_VIRTIO_H
 /* Everything a virtio driver needs to work with any particular virtio
@@ -9,6 +10,9 @@
 #include <linux/mod_devicetable.h>
 #include <linux/gfp.h>
 
+/* XXX: 3. virtqueue  : embaded in the "struct vring_virtqueue"
+ *      kvm (backend) and guest driver (frontend)
+ */
 /**
  * virtqueue - a queue to register buffers for sending or receiving.
  * @list: the chain of virtqueues for this device
@@ -18,7 +22,7 @@
  * @priv: a pointer for the virtqueue implementation to use.
  */
 struct virtqueue {
-	struct list_head list;
+	struct list_head list; /* XXX: list of virt-queues for same device */
 	void (*callback)(struct virtqueue *vq);
 	const char *name;
 	struct virtio_device *vdev;
@@ -88,6 +92,8 @@ bool virtqueue_enable_cb(struct virtqueue *vq);
 
 void *virtqueue_detach_unused_buf(struct virtqueue *vq);
 
+/* XXX: 1. virtio device
+ *      bus to connect front end and backend? */
 /**
  * virtio_device - representation of a device using virtio
  * @index: unique position on the virtio bus
@@ -99,11 +105,13 @@ void *virtqueue_detach_unused_buf(struct virtqueue *vq);
  * @priv: private pointer for the driver's use.
  */
 struct virtio_device {
-	int index;
+	int index;  /* XXX: TODO: virtio bus index ? */
 	struct device dev;
 	struct virtio_device_id id;
 	struct virtio_config_ops *config;
-	struct list_head vqs;
+	struct list_head vqs;   /* XXX: virtual queues head, so
+                               there can be multiple queues for one 
+                               device*/
 	/* Note that this is a Linux set_bit-style bitmap. */
 	unsigned long features[1];
 	void *priv;
@@ -113,6 +121,8 @@ struct virtio_device {
 int register_virtio_device(struct virtio_device *dev);
 void unregister_virtio_device(struct virtio_device *dev);
 
+/* XXX: 2. virtio device driver
+ *      virtio_device & virtio_dirver will have same virtio_device_id */
 /**
  * virtio_driver - operations for a virtio I/O driver
  * @driver: underlying device driver (populate name and owner).

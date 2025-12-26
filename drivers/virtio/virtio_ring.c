@@ -69,10 +69,12 @@
 #define END_USE(vq)
 #endif
 
+/* XXX: 4. vring_virtqueue; from vq->vdev we can get to device */
 struct vring_virtqueue
 {
 	struct virtqueue vq;
 
+    /* XXX: Actual memory */
 	/* Actual memory layout for this queue */
 	struct vring vring;
 
@@ -403,6 +405,14 @@ irqreturn_t vring_interrupt(int irq, void *_vq)
 }
 EXPORT_SYMBOL_GPL(vring_interrupt);
 
+/* XXX: 6. get an virtqueue
+ *      allocates vring_virtqueue
+ *      and its members:
+ *          virtqueue
+ *          vring
+ *      and init each of them
+ *      returns virtqueue
+ */
 struct virtqueue *vring_new_virtqueue(unsigned int num,
 				      unsigned int vring_align,
 				      struct virtio_device *vdev,

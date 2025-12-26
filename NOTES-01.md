@@ -69,6 +69,7 @@ Phase 1 – Core (mandatory)
     virtio_ring.h
     virtio_ring.c
     virtio.c
+    virtio.h
 Phase 2 – Transport
     virtio_pci.c
 Phase 3 – Small device
