@@ -161,13 +161,23 @@ static int virtio_dev_remove(struct device *_d)
 	return 0;
 }
 
+/*XXX:  virtio bus 
+ *      virtio_bus is a guest-kernel software bus used to bind virtio
+ *      frontend drivers to virtio frontend devices; it has nothing 
+ *      to do with KVM directly and only indirectly connects to QEMU
+ *      through shared memory vrings.
+ */
 static struct bus_type virtio_bus = {
 	.name  = "virtio",
 	.match = virtio_dev_match,
 	.dev_attrs = virtio_dev_attrs,
-	.uevent = virtio_uevent,
-	.probe = virtio_dev_probe,
-	.remove = virtio_dev_remove,
+	.uevent = virtio_uevent,        /*XXX: virtio_uevent is a guest-kernel
+                                     * callback used to generate userspace
+                                     * hotplug events (udev events) for virtio
+                                     * devices.
+                                     */
+	.probe = virtio_dev_probe,      /*XXX: attach a device */
+	.remove = virtio_dev_remove,    /*XXX: remove a device */
 };
 
 int register_virtio_driver(struct virtio_driver *driver)
@@ -230,7 +240,10 @@ static void __exit virtio_exit(void)
 {
 	bus_unregister(&virtio_bus);
 }
+
+/*XXX: init the virtio module */
 core_initcall(virtio_init);
+/*XXX: cleanup on virtio module exit*/
 module_exit(virtio_exit);
 
 MODULE_LICENSE("GPL");
