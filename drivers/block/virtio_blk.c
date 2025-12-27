@@ -11,6 +11,7 @@
 
 static int major, index;
 
+/*XXX: virtio block driver */
 struct virtio_blk
 {
 	spinlock_t lock;
@@ -259,6 +260,7 @@ static int virtblk_getgeo(struct block_device *bd, struct hd_geometry *geo)
 	return 0;
 }
 
+/*XXX: virtio_block_device operations */
 static const struct block_device_operations virtblk_fops = {
 	.ioctl  = virtblk_ioctl,
 	.owner  = THIS_MODULE,
@@ -517,6 +519,7 @@ static struct virtio_driver __refdata virtio_blk = {
 	.remove =	__devexit_p(virtblk_remove),
 };
 
+/*XXX: Register the block device */
 static int __init init(void)
 {
 	major = register_blkdev(0, "virtblk");
