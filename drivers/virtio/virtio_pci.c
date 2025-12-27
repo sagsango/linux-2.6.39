@@ -31,15 +31,23 @@ MODULE_DESCRIPTION("virtio-pci");
 MODULE_LICENSE("GPL");
 MODULE_VERSION("1");
 
+/* XXX: virtio_pci_device */
 /* Our device structure */
 struct virtio_pci_device
 {
+    /* XXX: virtio device is embadded in the
+     *      virtio_pci_device
+     */
 	struct virtio_device vdev;
 	struct pci_dev *pci_dev;
 
 	/* the IO mapping for the PCI config space */
 	void __iomem *ioaddr;
 
+    /* XXX: This is not same as virtio-queue
+     *      Transport/IRQ bookkeeping queues
+     *      (PCI-only, driver-invisible)
+     */
 	/* a list of queues so we can dispatch IRQs */
 	spinlock_t lock;
 	struct list_head virtqueues;
@@ -55,7 +63,7 @@ struct virtio_pci_device
 	unsigned msix_vectors;
 	/* Vectors allocated, excluding per-vq vectors if any */
 	unsigned msix_used_vectors;
-	/* Whether we have vector per vq */
+   	/* Whether we have vector per vq */
 	bool per_vq_vectors;
 };
 
@@ -597,6 +605,7 @@ static void virtio_pci_release_dev(struct device *_d)
 	kfree(vp_dev);
 }
 
+/*XXX: virtio_pci_device registration */
 /* the PCI probing function */
 static int __devinit virtio_pci_probe(struct pci_dev *pci_dev,
 				      const struct pci_device_id *id)
@@ -652,6 +661,7 @@ static int __devinit virtio_pci_probe(struct pci_dev *pci_dev,
 	vp_dev->vdev.id.vendor = pci_dev->subsystem_vendor;
 	vp_dev->vdev.id.device = pci_dev->subsystem_device;
 
+    /*XXX: register the virtio device */
 	/* finally register the virtio device */
 	err = register_virtio_device(&vp_dev->vdev);
 	if (err)
@@ -700,9 +710,15 @@ static int virtio_pci_resume(struct pci_dev *pci_dev)
 }
 #endif
 
+/*XX: virtio_pci_driver ops */
 static struct pci_driver virtio_pci_driver = {
 	.name		= "virtio-pci",
+    /*XXX: Which PCI devices should I bind to? */
 	.id_table	= virtio_pci_id_table,
+    /* XXX: when it will be called
+     *  PCI bus scans a device
+     *  Vendor/device ID matches id_table
+     */
 	.probe		= virtio_pci_probe,
 	.remove		= __devexit_p(virtio_pci_remove),
 #ifdef CONFIG_PM
