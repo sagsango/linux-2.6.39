@@ -58,6 +58,10 @@ void __devinit pcibios_scan_specific_bus(int busn)
 }
 EXPORT_SYMBOL_GPL(pcibios_scan_specific_bus);
 
+/* XXX: Here we are detecting the devices from the pci bus
+ *      one question is why its call legacy.c?
+ *      do we have modern code present somewhere?
+ */
 int __init pci_subsys_init(void)
 {
 	/*

@@ -453,6 +453,7 @@ static void __init mm_init(void)
 	vmalloc_init();
 }
 
+/* XXX: Stage 1 for pci scan */
 asmlinkage void __init start_kernel(void)
 {
 	char * command_line;
@@ -485,6 +486,7 @@ asmlinkage void __init start_kernel(void)
 	boot_cpu_init();
 	page_address_init();
 	printk(KERN_NOTICE "%s", linux_banner);
+    /*XXX: Going for stage 2 */
 	setup_arch(&command_line);
 	mm_init_owner(&init_mm, &init_task);
 	setup_command_line(command_line);

@@ -676,6 +676,7 @@ static int __init parse_reservelow(char *p)
 
 early_param("reservelow", parse_reservelow);
 
+/* XXX: Stage 2 of the pci scan */
 /*
  * Determine if we were loaded by an EFI loader.  If so, then we have also been
  * passed the efi memmap, systab, etc., so we should use these data structures
@@ -826,6 +827,7 @@ void __init setup_arch(char **cmdline_p)
 		setup_clear_cpu_cap(X86_FEATURE_APIC);
 	}
 
+    /* XXX: If configured we will get the pci dump of the devices */
 #ifdef CONFIG_PCI
 	if (pci_early_dump_regs)
 		early_dump_pci_devices();

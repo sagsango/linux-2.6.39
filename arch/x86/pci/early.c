@@ -78,6 +78,7 @@ void early_dump_pci_device(u8 bus, u8 slot, u8 func)
 	printk("\n");
 }
 
+/* XXX: Sweet pci scan :) */
 void early_dump_pci_devices(void)
 {
 	unsigned bus, slot, func;
