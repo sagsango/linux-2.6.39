@@ -197,6 +197,7 @@ static int suspend_enter(suspend_state_t state)
 	return error;
 }
 
+/* XXX: devices getting freeze */
 /**
  *	suspend_devices_and_enter - suspend devices and enter the desired system
  *				    sleep state.

@@ -910,6 +910,10 @@ static int device_suspend(struct device *dev)
 	return __device_suspend(dev, pm_transition, false);
 }
 
+/* XXX: device power management suspend;
+ *      calls the device_suspend callback
+ *      for every device which are non-sysdev
+ */
 /**
  * dpm_suspend - Execute "suspend" callbacks for all non-sysdev devices.
  * @state: PM transition of the system being carried out.

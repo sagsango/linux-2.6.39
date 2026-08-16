@@ -394,6 +394,7 @@ static void __sysdev_resume(struct sys_device *dev)
 	}
 }
 
+/* XXX: suspend all the devices which are in sysdev */
 /**
  *	sysdev_suspend - Suspend all system devices.
  *	@state:		Power state to enter.

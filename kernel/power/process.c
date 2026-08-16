@@ -134,6 +134,9 @@ static int try_to_freeze_tasks(bool sig_only)
 	return todo ? -EBUSY : 0;
 }
 
+/* XXX: main loop which freezes all the userspace
+ *      then kernelspace tasks
+ */
 /**
  *	freeze_processes - tell processes to enter the refrigerator
  */

@@ -78,6 +78,12 @@ struct sysdev_driver {
 	int	(*add)(struct sys_device *);
 	int	(*remove)(struct sys_device *);
 #ifndef CONFIG_ARCH_NO_SYSDEV_OPS
+    /* XXX: this is the callback for device
+     *      for request it to - 
+     *          1. suspend
+     *          2. shutdown
+     *          3. resume (after restoring the mem state)
+     */
 	int	(*shutdown)(struct sys_device *);
 	int	(*suspend)(struct sys_device *, pm_message_t state);
 	int	(*resume)(struct sys_device *);
