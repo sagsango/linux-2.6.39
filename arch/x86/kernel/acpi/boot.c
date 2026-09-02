@@ -517,6 +517,9 @@ int acpi_gsi_to_irq(u32 gsi, unsigned int *irq)
 }
 EXPORT_SYMBOL_GPL(acpi_gsi_to_irq);
 
+/* XXX: Given a legacy ISA IRQ number, return the ACPI GSI that ACPI says
+ * corresponds to
+ */
 int acpi_isa_irq_to_gsi(unsigned isa_irq, u32 *gsi)
 {
 	if (isa_irq >= 16)
@@ -943,6 +946,9 @@ static int __init acpi_parse_madt_lapic_entries(void)
 extern int es7000_plat;
 #endif
 
+/* XXX: Take a legacy ISA IRQ (0–15), apply an ACPI interrupt override for it,
+ * and record which IOAPIC pin/GSI should actually handle that interrupt.
+ */
 void __init mp_override_legacy_irq(u8 bus_irq, u8 polarity, u8 trigger, u32 gsi)
 {
 	int ioapic;
@@ -978,6 +984,10 @@ void __init mp_override_legacy_irq(u8 bus_irq, u8 polarity, u8 trigger, u32 gsi)
 	isa_irq_to_gsi[bus_irq] = gsi;
 }
 
+/* XXX:
+ * Convert an ISA IRQ number (0–15) into the corresponding 
+ * ACPI Global System Interrupt (GSI).
+ */
 void __init mp_config_acpi_legacy_irqs(void)
 {
 	int i;

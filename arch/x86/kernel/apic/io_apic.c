@@ -131,6 +131,11 @@ early_param("noapic", parse_noapic);
 static int io_apic_setup_irq_pin(unsigned int irq, int node,
 				 struct io_apic_irq_attr *attr);
 
+/*
+ * XXX: Take one interrupt-routing description (struct mpc_intsrc) obtained
+ * from MP/ACPI/SFI parsing and save it into the kernel's global IRQ-source
+ * table mp_irqs[].
+ */
 /* Will be called in mpparse/acpi/sfi codes for saving IRQ info */
 void mp_save_irq(struct mpc_intsrc *m)
 {
